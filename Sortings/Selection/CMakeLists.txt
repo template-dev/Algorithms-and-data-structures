@@ -6,7 +6,7 @@ project(${PROJECT_NAME})
 
 add_executable(
         ${PROJECT_NAME}
-        Selection/selectionSort.h
+        selectionSort.h
         main.cpp
 )
 
