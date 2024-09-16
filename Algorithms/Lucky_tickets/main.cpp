@@ -1,7 +1,14 @@
-#include <iostream>
+#include "Solution.hpp"
 
 int main(int argc, char** argv) {
-  std::cout << "Lucky Tickets Solution" << std::endl;
+  try {
+    Solution::LuckyTikets luckyTickets;
+    std::cout << luckyTickets.RunRecursion() << std::endl;
+  }
+  catch (const std::exception& ex) {
+    std::cout << ex.what() << std::endl;
+  }
+
   std::cin.get();
   return EXIT_SUCCESS;
 }
