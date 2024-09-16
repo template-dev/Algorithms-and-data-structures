@@ -2,7 +2,7 @@
 
 long Solution::LuckyTikets::Run() {
   int amount{};
-  std::cout << "---[ Normal Mode ]---" << std::endl;
+  std::cout << "---[ Non-Recursion Mode ]---" << std::endl;
   std::cout << "Enter the input data: ";
   std::cin >> amount;
   return m_tickets(amount);
