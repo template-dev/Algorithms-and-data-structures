@@ -6,8 +6,8 @@
 namespace Solution {
   class LuckyTikets {
   public:
-    long Run();
-    long RunRecursion();
+    long Run(int number);
+    long RunRecursion(int number);
 
   private:
     long m_tickets(int digits);

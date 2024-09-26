@@ -2,23 +2,26 @@
 
 void Test::LuckyTicketsTest::Run() {
   short iter{};
-  auto inputFile = m_path / "TestData" / "test." += std::to_string(iter) + ".in";
-  auto outputFile = m_path / "TestData" / "test." += std::to_string(iter) + ".out";
-  std::cout << inputFile << std::endl << outputFile << std::endl;
-
+  short counter{1};
   while (true) {
+    auto inputFile = m_path / "TestData" / "test." += std::to_string(iter) + ".in";
+    auto outputFile = m_path / "TestData" / "test." += std::to_string(iter) + ".out";
+
     if (!std::filesystem::exists(inputFile) || !std::filesystem::exists(outputFile))
       return;
 
     long inputValue = m_readFile(inputFile);
     long outputValue = m_readFile(outputFile);
+    
+    long solveResult = m_luckySolution->Run(counter);
 
-    if (m_resultFromSolution == outputValue)
+    if (solveResult == outputValue)
       std::cout << "Test " << iter << " OK: " << inputValue << std::endl;
     else
       std::cout << "Test " << iter << " ERROR: " << inputValue << " expected: " << outputValue << std::endl;
 
     ++iter;
+    ++counter;
   }
 }
 
