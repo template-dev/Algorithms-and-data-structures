@@ -11,7 +11,7 @@ namespace Solution {
 
   private:
     long m_tickets(int digits);
-    long m_recursiveTickets(int digits, int firstPart, int secondPart);
+    long m_recursiveTickets(int digits, int firstPart = 0, int secondPart = 0);
   };
 }
 
