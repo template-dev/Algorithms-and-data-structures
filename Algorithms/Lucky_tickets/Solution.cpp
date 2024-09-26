@@ -1,11 +1,11 @@
 #include "Solution.hpp"
 
 long Solution::LuckyTikets::Run() {
-  int amount{};
+  /*int amount{};
   std::cout << "---[ Non-Recursion Mode ]---" << std::endl;
   std::cout << "Enter the input data: ";
-  std::cin >> amount;
-  return m_tickets(amount);
+  std::cin >> amount;*/
+  return m_tickets(2);
 }
 
 long Solution::LuckyTikets::RunRecursion() {
