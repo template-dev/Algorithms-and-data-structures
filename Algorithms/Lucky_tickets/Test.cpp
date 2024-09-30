@@ -2,7 +2,7 @@
 
 void Test::LuckyTicketsTest::Run() {
   short iter{};
-  short counter{1};
+  int counter{1};
   while (true) {
     auto inputFile = m_path / "TestData" / "test." += std::to_string(iter) + ".in";
     auto outputFile = m_path / "TestData" / "test." += std::to_string(iter) + ".out";
@@ -10,10 +10,10 @@ void Test::LuckyTicketsTest::Run() {
     if (!std::filesystem::exists(inputFile) || !std::filesystem::exists(outputFile))
       return;
 
-    long inputValue = m_readFile(inputFile);
-    long outputValue = m_readFile(outputFile);
+    int64_t inputValue = m_readFile(inputFile);
+    int64_t outputValue = m_readFile(outputFile);
     
-    long solveResult = m_luckySolution->Run(counter);
+    int64_t solveResult = m_luckySolution->Run(counter);
 
     if (solveResult == outputValue)
       std::cout << "Test " << iter << " OK: " << inputValue << std::endl;
@@ -25,10 +25,10 @@ void Test::LuckyTicketsTest::Run() {
   }
 }
 
-long Test::LuckyTicketsTest::m_readFile(const std::filesystem::path& filename) {
+int64_t Test::LuckyTicketsTest::m_readFile(const std::filesystem::path& filename) {
   std::ifstream file(filename);
   if (file.is_open()) {
-    long number{};
+    int64_t number{};
     file >> number;
     file.close();
     return number;

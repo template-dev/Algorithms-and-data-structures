@@ -17,7 +17,7 @@ namespace Test {
     void Run();
 
   private:
-    long m_readFile(const std::filesystem::path& filename);
+    int64_t m_readFile(const std::filesystem::path& filename);
 
   private:
     std::filesystem::path m_path;

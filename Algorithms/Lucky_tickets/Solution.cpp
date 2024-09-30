@@ -1,15 +1,15 @@
 #include "Solution.hpp"
 
-long Solution::LuckyTikets::Run(int number) {
+int64_t Solution::LuckyTikets::Run(int number) {
   return m_tickets(number);
 }
 
-long Solution::LuckyTikets::RunRecursion(int number) {
+int64_t Solution::LuckyTikets::RunRecursion(int number) {
   return m_recursiveTickets(number);
 }
 
-long Solution::LuckyTikets::m_tickets(int digit) {
-  long count{};
+int64_t Solution::LuckyTikets::m_tickets(int digit) {
+  int64_t count{};
   switch (digit) {
   case 1:
     for (short a1 = 0; a1 < 10; ++a1) {
@@ -287,8 +287,8 @@ long Solution::LuckyTikets::m_tickets(int digit) {
   }
 }
 
-long Solution::LuckyTikets::m_recursiveTickets(int digits, int firstPart /* = 0 */, int secondPart /* = 0 */) {
-  long count{};
+int64_t Solution::LuckyTikets::m_recursiveTickets(int digits, int firstPart /* = 0 */, int secondPart /* = 0 */) {
+  int64_t count{};
 
   if (digits == 0) {
     if (firstPart == secondPart) {
