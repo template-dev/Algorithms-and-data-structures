@@ -12,8 +12,8 @@ void Test::LuckyTicketsTest::Run() {
 
     int64_t inputValue = m_readFile(inputFile);
     int64_t outputValue = m_readFile(outputFile);
-    
-    int64_t solveResult = m_luckySolution->Run(counter);
+
+    int64_t solveResult = m_luckySolution->Run(inputValue);
 
     if (solveResult == outputValue)
       std::cout << "Test " << iter << " OK: " << inputValue << std::endl;
