@@ -13,6 +13,8 @@ add_executable(
   ${PROJECT_NAME}
   Fibonacci.hpp
   Fibonacci.cpp
+  GCD.hpp
+  GCD.cpp
   main.cpp
 )
 
