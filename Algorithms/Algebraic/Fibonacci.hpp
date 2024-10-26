@@ -10,13 +10,12 @@ namespace Algorithms {
     uint64_t Recursive(int n);
     uint64_t Iterative(int n);
     uint64_t Gold(int n);
-  };
+    uint64_t Matrix(int n);
 
-  /*std::vector<std::vector<uint64_t>> FibonacciMatrix(const std::vector<std::vector<uint64_t>>& a, const std::vector<std::vector<uint64_t>>& b) {
-    if(a[1].size() != b[0].size()) return {};
-    std::vector<std::vector<uint64_t>> result();
-    return {};
-  }*/
+  private:
+    std::vector<std::vector<uint64_t>> m_matrixMult(const std::vector<std::vector<uint64_t>>& a, const std::vector<std::vector<uint64_t>>& b);
+    std::vector<std::vector<uint64_t>> m_matrixPow(const std::vector<std::vector<uint64_t>>& a, int n);
+  };
 }
 
 #endif /* F8DB5878_8B45_4651_95E5_D14234517F0D */
