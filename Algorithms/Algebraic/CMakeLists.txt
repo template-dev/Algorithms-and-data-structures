@@ -11,6 +11,7 @@ project(${PROJECT_NAME})
 
 add_executable(
   ${PROJECT_NAME}
+  Fibonacci.hpp
   main.cpp
 )
 
