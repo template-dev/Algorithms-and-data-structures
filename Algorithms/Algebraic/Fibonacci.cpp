@@ -1,6 +1,45 @@
 #include "Fibonacci.hpp"
 
 namespace Algorithms {
+  void Fibonacci::RunAll(int n) {
+    RunRecursive(n);
+    RunIterative(n);
+    RunGold(n);
+    RunMatrix(n);
+  }
+
+  void Fibonacci::RunRecursive(int n) {
+    auto begin = std::chrono::steady_clock::now();
+    std::cout << "Recursive: " << Recursive(n);
+    auto end = std::chrono::steady_clock::now();
+    auto elapsed_ms = std::chrono::duration_cast<std::chrono::milliseconds>(end - begin);
+    std::cout << "\t| The time: " << elapsed_ms.count() << " ms" << std::endl;
+  }
+
+  void Fibonacci::RunIterative(int n) {
+    auto begin = std::chrono::steady_clock::now();
+    std::cout << "Iterative: " << Iterative(n);
+    auto end = std::chrono::steady_clock::now();
+    auto elapsed_ms = std::chrono::duration_cast<std::chrono::milliseconds>(end - begin);
+    std::cout << "\t| The time: " << elapsed_ms.count() << " ms" << std::endl;
+  }
+
+  void Fibonacci::RunGold(int n) {
+    auto begin = std::chrono::steady_clock::now();
+    std::cout << "Gold: " << Gold(n);
+    auto end = std::chrono::steady_clock::now();
+    auto elapsed_ms = std::chrono::duration_cast<std::chrono::milliseconds>(end - begin);
+    std::cout << "\t| The time: " << elapsed_ms.count() << " ms" << std::endl;
+  }
+
+  void Fibonacci::RunMatrix(int n) {
+    auto begin = std::chrono::steady_clock::now();
+    std::cout << "Matrix: " << Matrix(n);
+    auto end = std::chrono::steady_clock::now();
+    auto elapsed_ms = std::chrono::duration_cast<std::chrono::milliseconds>(end - begin);
+    std::cout << "\t| The time: " << elapsed_ms.count() << " ms" << std::endl;
+  }
+
   uint64_t Fibonacci::Recursive(int n) {
     if (n == 1 || n == 2) return 1;
     return Recursive(n - 1) + Recursive(n - 2);

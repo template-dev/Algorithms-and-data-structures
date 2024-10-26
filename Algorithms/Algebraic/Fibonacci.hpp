@@ -3,10 +3,19 @@
 
 #include <cmath>
 #include <vector>
+#include <chrono>
+#include <iostream>
 
 namespace Algorithms {
   class Fibonacci {
   public:
+    void RunRecursive(int n);
+    void RunIterative(int n);
+    void RunGold(int n);
+    void RunMatrix(int n);
+
+    void RunAll(int n);
+
     uint64_t Recursive(int n);
     uint64_t Iterative(int n);
     uint64_t Gold(int n);

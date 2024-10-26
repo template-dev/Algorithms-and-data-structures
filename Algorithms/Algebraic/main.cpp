@@ -1,12 +1,9 @@
-#include <iostream>
+#include <memory>
 #include "Fibonacci.hpp"
 
 int main(int argc, char** argv) {
-  Algorithms::Fibonacci fib;
-  std::cout << "Recursive: " << fib.Recursive(5) << std::endl;
-  std::cout << "Iterative: " << fib.Iterative(5) << std::endl;
-  std::cout << "Gold: " << fib.Gold(5) << std::endl;
-  std::cout << "Matrix: " << fib.Matrix(5) << std::endl;
+  std::unique_ptr<Algorithms::Fibonacci> pFibonacci = std::make_unique<Algorithms::Fibonacci>();
+  pFibonacci->RunAll(100);
 
   return EXIT_SUCCESS;
 }
