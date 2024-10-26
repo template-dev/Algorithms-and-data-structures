@@ -1,14 +1,14 @@
-#include "Solution.hpp"
+#include "LuckyTikets.hpp"
 
-int64_t Solution::LuckyTikets::Run(int number) {
+int64_t Algorithms::LuckyTikets::Run(int64_t number) {
   return m_tickets(number);
 }
 
-int64_t Solution::LuckyTikets::RunRecursion(int number) {
+int64_t Algorithms::LuckyTikets::RunRecursion(int64_t number) {
   return m_recursiveTickets(number);
 }
 
-int64_t Solution::LuckyTikets::m_tickets(int digit) {
+int64_t Algorithms::LuckyTikets::m_tickets(int64_t digit) {
   int64_t count{};
   switch (digit) {
   case 1:
@@ -287,7 +287,7 @@ int64_t Solution::LuckyTikets::m_tickets(int digit) {
   }
 }
 
-int64_t Solution::LuckyTikets::m_recursiveTickets(int digits, int firstPart /* = 0 */, int secondPart /* = 0 */) {
+int64_t Algorithms::LuckyTikets::m_recursiveTickets(int64_t digits, int64_t firstPart /* = 0 */, int64_t secondPart /* = 0 */) {
   int64_t count{};
 
   if (digits == 0) {
@@ -297,8 +297,8 @@ int64_t Solution::LuckyTikets::m_recursiveTickets(int digits, int firstPart /* =
     return 0;
   }
 
-  for (int first = 0; first < 10; ++first) {
-    for (int second = 0; second < 10; ++second) {
+  for (short first = 0; first < 10; ++first) {
+    for (short second = 0; second < 10; ++second) {
       count += m_recursiveTickets(digits - 1, firstPart + first, secondPart + second);
     }
   }

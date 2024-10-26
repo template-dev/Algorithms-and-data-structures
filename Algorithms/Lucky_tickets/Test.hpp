@@ -5,14 +5,14 @@
 #include <string>
 #include <fstream>
 #include <filesystem>
-#include "Solution.hpp"
+#include "LuckyTikets.hpp"
 
 namespace Test {
   class LuckyTicketsTest {
   public:
     LuckyTicketsTest()
       : m_path{ std::filesystem::current_path() }
-      , m_luckySolution{ std::make_unique<Solution::LuckyTikets>() }
+      , m_luckySolution{ std::make_unique<Algorithms::LuckyTikets>() }
     {}
     void Run();
 
@@ -21,7 +21,7 @@ namespace Test {
 
   private:
     std::filesystem::path m_path;
-    std::unique_ptr<Solution::LuckyTikets> m_luckySolution;
+    std::unique_ptr<Algorithms::LuckyTikets> m_luckySolution;
   };
 }
 

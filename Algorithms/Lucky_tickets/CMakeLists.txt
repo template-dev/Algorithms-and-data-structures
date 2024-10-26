@@ -7,8 +7,8 @@ project(${PROJECT_NAME})
 
 add_executable(
   ${PROJECT_NAME}
-  Solution.hpp
-  Solution.cpp
+  LuckyTikets.hpp
+  LuckyTikets.cpp
   Test.hpp
   Test.cpp
   main.cpp

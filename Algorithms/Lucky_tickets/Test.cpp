@@ -1,4 +1,5 @@
 #include "Test.hpp"
+#include <chrono>
 
 void Test::LuckyTicketsTest::Run() {
   short iter{};
@@ -13,12 +14,19 @@ void Test::LuckyTicketsTest::Run() {
     int64_t inputValue = m_readFile(inputFile);
     int64_t outputValue = m_readFile(outputFile);
 
+    auto begin = std::chrono::steady_clock::now();
+
     int64_t solveResult = m_luckySolution->Run(inputValue);
 
+    auto end = std::chrono::steady_clock::now();
+    auto elapsed_ms = std::chrono::duration_cast<std::chrono::milliseconds>(end - begin);
+
     if (solveResult == outputValue)
-      std::cout << "Test " << iter << " OK: " << inputValue << std::endl;
+      std::cout << "Test " << iter << " OK: " << inputValue;
     else
-      std::cout << "Test " << iter << " ERROR: " << inputValue << " expected: " << outputValue << std::endl;
+      std::cout << "Test " << iter << " ERROR: " << inputValue << " expected: " << outputValue;
+
+    std::cout << " | The time: " << elapsed_ms.count() << " ms" << std::endl;
 
     ++iter;
     ++counter;
