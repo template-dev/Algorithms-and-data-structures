@@ -1,9 +1,9 @@
 #include <iostream>
-#include "GCD.hpp"
+#include "Tests.hpp"
 
 int main(int argc, char** argv) {
-  Algorithms::GCD gcd;
-  std::cout << "Recursive " << gcd.SteinzRecursive(125, 50) << std::endl;
+  std::unique_ptr<Tests> pTests = std::make_unique<Tests>();
+  pTests->Run();
 
   return EXIT_SUCCESS;
 }
