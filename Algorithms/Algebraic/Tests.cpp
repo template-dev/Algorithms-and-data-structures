@@ -3,9 +3,11 @@
 void Tests::Run() {
   std::thread th_fibonacci(&Tests::m_runFibonacci, this);
   std::thread th_gcd(&Tests::m_runGCD, this);
+  std::thread th_power(&Tests::m_runPower, this);
 
   th_fibonacci.join();
   th_gcd.join();
+  th_power.join();
 }
 
 void Tests::m_runFibonacci() {
@@ -66,6 +68,47 @@ void Tests::m_runGCD() {
 
     auto begin = std::chrono::steady_clock::now();
     int64_t solveResult = m_pGCD->EuclidSubtractionIterative(m, n);
+    auto end = std::chrono::steady_clock::now();
+    auto elapsed_ms = std::chrono::duration_cast<std::chrono::milliseconds>(end - begin);
+
+    if (solveResult == outputValue)
+      std::cout << "Test " << iter << " OK";
+    else
+      std::cout << "Test " << iter << " ERROR: " << solveResult << " expected: " << outputValue;
+
+    std::cout << " | The time: " << elapsed_ms.count() << " ms" << std::endl;
+
+    ++iter;
+    ++counter;
+  }
+}
+
+void Tests::m_runPower() {
+  std::lock_guard<std::mutex> _(m_mutex);
+  std::cout << "---[ Power ]---" << std::endl;
+  short iter{};
+  int counter{1};
+  while (true) {
+    auto inputFile = m_path / "Power" / "test." += std::to_string(iter) + ".in";
+    auto outputFile = m_path / "Power" / "test." += std::to_string(iter) + ".out";
+
+    if (!std::filesystem::exists(inputFile) || !std::filesystem::exists(outputFile))
+      return;
+
+    long double m{};
+    int64_t n{};
+
+    std::ifstream file(inputFile);
+    if (file.is_open()) {
+      file >> m;
+      file >> n;
+      file.close();
+    }
+
+    long double outputValue = m_readFile<long double>(outputFile);
+
+    auto begin = std::chrono::steady_clock::now();
+    long double solveResult = m_pPower->PowerOptimized(m, n);
     auto end = std::chrono::steady_clock::now();
     auto elapsed_ms = std::chrono::duration_cast<std::chrono::milliseconds>(end - begin);
 

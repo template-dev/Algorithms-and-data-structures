@@ -11,6 +11,7 @@
 
 #include "GCD.hpp"
 #include "Fibonacci.hpp"
+#include "Power.hpp"
 
 class Tests {
 public:
@@ -18,6 +19,7 @@ public:
     : m_path{ std::filesystem::current_path() }
     , m_pGCD{ std::make_unique<Algorithms::GCD>() }
     , m_pFibonacci{ std::make_unique<Algorithms::Fibonacci>() }
+    , m_pPower{ std::make_unique<Algorithms::Power>() }
   {}
 
   void Run();
@@ -27,11 +29,13 @@ private:
   T m_readFile(const std::filesystem::path& filename);
   void m_runFibonacci();
   void m_runGCD();
+  void m_runPower();
 
 private:
   std::filesystem::path m_path;
   std::unique_ptr<Algorithms::GCD> m_pGCD;
   std::unique_ptr<Algorithms::Fibonacci> m_pFibonacci;
+  std::unique_ptr<Algorithms::Power> m_pPower;
   std::mutex m_mutex;
 };
 
