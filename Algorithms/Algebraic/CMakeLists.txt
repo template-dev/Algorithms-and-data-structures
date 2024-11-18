@@ -15,6 +15,8 @@ add_executable(
   Fibonacci.cpp
   GCD.hpp
   GCD.cpp
+  Power.hpp
+  Power.cpp
   Tests.hpp
   Tests.cpp
   main.cpp
