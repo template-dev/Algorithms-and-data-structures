@@ -1,16 +1,43 @@
 #include "Tests.hpp"
 
 void Tests::Run() {
-  //std::thread th_fibonacci(&Tests::m_runFibonacci, this);
+  std::thread th_fibonacci(&Tests::m_runFibonacci, this);
   std::thread th_gcd(&Tests::m_runGCD, this);
 
-  //th_fibonacci.join();
+  th_fibonacci.join();
   th_gcd.join();
 }
 
 void Tests::m_runFibonacci() {
   std::lock_guard<std::mutex> _(m_mutex);
   std::cout << "---[ Fibonacci ]---" << std::endl;
+  short iter{};
+  int counter{1};
+  while (true) {
+    auto inputFile = m_path / "Fibo" / "test." += std::to_string(iter) + ".in";
+    auto outputFile = m_path / "Fibo" / "test." += std::to_string(iter) + ".out";
+
+    if (!std::filesystem::exists(inputFile) || !std::filesystem::exists(outputFile))
+      return;
+
+    int n = m_readFile<int>(inputFile);
+    int64_t outputValue = m_readFile<int64_t>(outputFile);
+
+    auto begin = std::chrono::steady_clock::now();
+    int64_t solveResult = m_pFibonacci->Gold(n);
+    auto end = std::chrono::steady_clock::now();
+    auto elapsed_ms = std::chrono::duration_cast<std::chrono::milliseconds>(end - begin);
+
+    if (solveResult == outputValue)
+      std::cout << "Test " << iter << " OK";
+    else
+      std::cout << "Test " << iter << " ERROR: " << solveResult << " expected: " << outputValue;
+
+    std::cout << " | The time: " << elapsed_ms.count() << " ms" << std::endl;
+
+    ++iter;
+    ++counter;
+  }
 }
 
 void Tests::m_runGCD() {
@@ -38,9 +65,7 @@ void Tests::m_runGCD() {
     int64_t outputValue = m_readFile<int64_t>(outputFile);
 
     auto begin = std::chrono::steady_clock::now();
-
-    int64_t solveResult = m_pGCD->EuclidRemainderOfTheDivisionRecursive(m, n);
-
+    int64_t solveResult = m_pGCD->EuclidSubtractionIterative(m, n);
     auto end = std::chrono::steady_clock::now();
     auto elapsed_ms = std::chrono::duration_cast<std::chrono::milliseconds>(end - begin);
 

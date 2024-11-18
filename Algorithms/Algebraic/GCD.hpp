@@ -12,7 +12,6 @@ namespace Algorithms {
     int64_t EuclidRemainderOfTheDivisionRecursive(int64_t m, int64_t n);
     int64_t EuclidRemainderOfTheDivisionIterative(int64_t m, int64_t n);
     int64_t SteinzRecursive(int64_t m, int64_t n);
-    int64_t SteinzIterative(int64_t m, int64_t n);
   };
 }
 

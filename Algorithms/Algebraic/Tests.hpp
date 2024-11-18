@@ -10,12 +10,14 @@
 #include <mutex>
 
 #include "GCD.hpp"
+#include "Fibonacci.hpp"
 
 class Tests {
 public:
   Tests()
     : m_path{ std::filesystem::current_path() }
     , m_pGCD{ std::make_unique<Algorithms::GCD>() }
+    , m_pFibonacci{ std::make_unique<Algorithms::Fibonacci>() }
   {}
 
   void Run();
@@ -29,6 +31,7 @@ private:
 private:
   std::filesystem::path m_path;
   std::unique_ptr<Algorithms::GCD> m_pGCD;
+  std::unique_ptr<Algorithms::Fibonacci> m_pFibonacci;
   std::mutex m_mutex;
 };
 
