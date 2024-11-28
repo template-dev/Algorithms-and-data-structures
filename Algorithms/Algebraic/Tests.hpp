@@ -29,10 +29,13 @@ public:
 private:
   template<typename T>
   T m_readFile(const std::filesystem::path& filename);
+  template<>
+  int64_t m_readFile<int64_t>(const std::filesystem::path& filename);
   void m_runFibonacci();
   void m_runGCD();
   void m_runPower();
   void m_runPrime();
+  bool isValidInt64(const std::string& str, int64_t& result);
 
 private:
   std::filesystem::path m_path;

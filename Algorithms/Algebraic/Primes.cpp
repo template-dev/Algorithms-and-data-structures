@@ -21,7 +21,7 @@ namespace Algorithms {
 
   int32_t Primes::Eratosphene(int32_t value) {
     std::vector<bool> divs;
-    divs.reserve(value + 1);
+    divs.resize(value + 1);
     int32_t count{};
     int32_t sqrt_res = static_cast<int32_t>(std::sqrt(value));
     for (int32_t p = 2; p <= value; ++p) {

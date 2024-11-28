@@ -1,15 +1,15 @@
 #include "Tests.hpp"
 
 void Tests::Run() {
-  //std::thread th_fibonacci(&Tests::m_runFibonacci, this);
+  std::thread th_fibonacci(&Tests::m_runFibonacci, this);
   std::thread th_gcd(&Tests::m_runGCD, this);
-  //std::thread th_power(&Tests::m_runPower, this);
-  //std::thread th_prime(&Tests::m_runPrime, this);
+  std::thread th_power(&Tests::m_runPower, this);
+  std::thread th_prime(&Tests::m_runPrime, this);
 
-  //th_fibonacci.join();
+  th_fibonacci.join();
   th_gcd.join();
-  //th_power.join();
-  //th_prime.join();
+  th_power.join();
+  th_prime.join();
 }
 
 void Tests::m_runFibonacci() {
@@ -20,10 +20,8 @@ void Tests::m_runFibonacci() {
     auto inputFile = m_path / "Fibo" / "test." += std::to_string(iter) + ".in";
     auto outputFile = m_path / "Fibo" / "test." += std::to_string(iter) + ".out";
 
-    if (!std::filesystem::exists(inputFile) || !std::filesystem::exists(outputFile)) {
-      std::cerr << "File(s) " << inputFile.filename() << " or " << outputFile.filename() << " not found!" << std::endl;
+    if (!std::filesystem::exists(inputFile) || !std::filesystem::exists(outputFile))
       return;
-    }
 
     int n = m_readFile<int>(inputFile);
     int64_t outputValue = m_readFile<int64_t>(outputFile);
@@ -52,20 +50,27 @@ void Tests::m_runGCD() {
     auto inputFile = m_path / "GCD" / "test." += std::to_string(iter) + ".in";
     auto outputFile = m_path / "GCD" / "test." += std::to_string(iter) + ".out";
 
-    if (!std::filesystem::exists(inputFile) || !std::filesystem::exists(outputFile)) {
-      std::cerr << "File(s) " << inputFile.filename() << " or " << outputFile.filename() << " not found!" << std::endl;
+    if (!std::filesystem::exists(inputFile) || !std::filesystem::exists(outputFile))
       return;
-    }
 
+    std::string checkFirstParam;
+    std::string checkSecondParam;
     int64_t m{};
     int64_t n{};
 
     std::ifstream file(inputFile);
     if (file.is_open()) {
-      file >> m;
-      file >> n;
+      file >> checkFirstParam;
+      file >> checkSecondParam;
       file.close();
     }
+
+    if(!isValidInt64(checkFirstParam, m)) {
+      break;
+    }
+
+    m = std::stoll(checkFirstParam);
+    n = std::stoll(checkSecondParam);
 
     int64_t outputValue = m_readFile<int64_t>(outputFile);
 
@@ -93,10 +98,8 @@ void Tests::m_runPower() {
     auto inputFile = m_path / "Power" / "test." += std::to_string(iter) + ".in";
     auto outputFile = m_path / "Power" / "test." += std::to_string(iter) + ".out";
 
-    if (!std::filesystem::exists(inputFile) || !std::filesystem::exists(outputFile)) {
-      std::cerr << "File(s) " << inputFile.filename() << " or " << outputFile.filename() << " not found!" << std::endl;
+    if (!std::filesystem::exists(inputFile) || !std::filesystem::exists(outputFile))
       return;
-    }
 
     long double m{};
     int64_t n{};
@@ -128,17 +131,14 @@ void Tests::m_runPower() {
 
 void Tests::m_runPrime() {
   std::lock_guard<std::mutex> _(m_mutex);
-  std::cout << "---[ Power ]---" << std::endl;
+  std::cout << "---[ Prime ]---" << std::endl;
   short iter{};
   while (true) {
-    auto inputFile = m_path / "Power" / "test." += std::to_string(iter) + ".in";
-    auto outputFile = m_path / "Power" / "test." += std::to_string(iter) + ".out";
+    auto inputFile = m_path / "Primes" / "test." += std::to_string(iter) + ".in";
+    auto outputFile = m_path / "Primes" / "test." += std::to_string(iter) + ".out";
 
-    if (!std::filesystem::exists(inputFile) || !std::filesystem::exists(outputFile)) {
-      std::cerr << "File(s) " << inputFile.filename() << " or " << outputFile.filename() << " not found!" << std::endl;
+    if (!std::filesystem::exists(inputFile) || !std::filesystem::exists(outputFile))
       return;
-    }
-    std::cout << inputFile << "\n" << outputFile << std::endl;
 
     int32_t inputValue = m_readFile<int32_t>(inputFile);
     int32_t outputValue = m_readFile<int32_t>(outputFile);
@@ -171,4 +171,46 @@ T Tests::m_readFile(const std::filesystem::path& filename) {
     return false;
   }
   return data;
+}
+
+template<>
+int64_t Tests::m_readFile<int64_t>(const std::filesystem::path& filename) {
+  std::ifstream file(filename);
+  int64_t data{};
+  std::string checkData;
+  if(file.is_open()) {
+    file >> checkData;
+    file.close();
+  } else {
+    std::cerr << "The file could not be opened!" << std::endl;
+    return false;
+  }
+
+  if (isValidInt64(checkData, data))
+    data = std::stoll(checkData);
+  else
+    return -1;
+
+  return data;
+}
+
+bool Tests::isValidInt64(const std::string& str, int64_t& result) {
+  try {
+    size_t pos;
+    long long value = std::stoll(str, &pos);
+
+    if (pos != str.size()) {
+        return false;
+    }
+
+    if (value < std::numeric_limits<int64_t>::min() || value > std::numeric_limits<int64_t>::max()) {
+        return false;
+    }
+
+    result = static_cast<int64_t>(value);
+    return true;
+  } catch (const std::exception& e) {
+      std::cerr << e.what() << std::endl;
+      return false;
+  }
 }
