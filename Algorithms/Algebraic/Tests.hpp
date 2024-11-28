@@ -12,6 +12,7 @@
 #include "GCD.hpp"
 #include "Fibonacci.hpp"
 #include "Power.hpp"
+#include "Primes.hpp"
 
 class Tests {
 public:
@@ -20,6 +21,7 @@ public:
     , m_pGCD{ std::make_unique<Algorithms::GCD>() }
     , m_pFibonacci{ std::make_unique<Algorithms::Fibonacci>() }
     , m_pPower{ std::make_unique<Algorithms::Power>() }
+    , m_pPrimes{ std::make_unique<Algorithms::Primes>() }
   {}
 
   void Run();
@@ -30,12 +32,14 @@ private:
   void m_runFibonacci();
   void m_runGCD();
   void m_runPower();
+  void m_runPrime();
 
 private:
   std::filesystem::path m_path;
   std::unique_ptr<Algorithms::GCD> m_pGCD;
   std::unique_ptr<Algorithms::Fibonacci> m_pFibonacci;
   std::unique_ptr<Algorithms::Power> m_pPower;
+  std::unique_ptr<Algorithms::Primes> m_pPrimes;
   std::mutex m_mutex;
 };
 

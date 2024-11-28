@@ -6,9 +6,9 @@
 namespace Algorithms {
   class Power {
   public:
-    long double PowerRecursion(long double value, int64_t n);
-    long double PowerIterative(long double value, int64_t n);
-    long double PowerOptimized(long double value, int64_t n);
+    double PowerRecursion(double value, int64_t n);
+    double PowerIterative(double value, int64_t n);
+    double PowerOptimized(double value, int64_t n);
   };
 }
 
