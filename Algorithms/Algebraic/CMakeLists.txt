@@ -17,6 +17,8 @@ add_executable(
   GCD.cpp
   Power.hpp
   Power.cpp
+  Primes.hpp
+  Primes.cpp
   Tests.hpp
   Tests.cpp
   main.cpp
