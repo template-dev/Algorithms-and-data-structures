@@ -10,3 +10,11 @@ add_subdirectory(
 add_subdirectory(
   ${CMAKE_CURRENT_SOURCE_DIR}/Algorithms/Lucky_tickets
 )
+
+add_subdirectory(
+  "${CMAKE_CURRENT_SOURCE_DIR}/Basic data structures/Dynamic arrays"
+)
+
+add_subdirectory(
+  "${CMAKE_CURRENT_SOURCE_DIR}/Basic data structures/Priority queue"
+)
