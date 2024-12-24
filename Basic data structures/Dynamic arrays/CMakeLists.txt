@@ -10,6 +10,8 @@ add_executable(
   SingleArray.inl
   VectorArray.hpp
   VectorArray.inl
+  FactorArray.hpp
+  FactorArray.inl
   main.cpp
 )
 
