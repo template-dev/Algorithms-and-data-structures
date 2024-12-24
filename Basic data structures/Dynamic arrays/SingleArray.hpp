@@ -30,6 +30,7 @@ namespace DataStructure {
 
   private:
     size_t m_size;
+    size_t m_coeff;
     std::unique_ptr<T[]> m_data;
   };
 }

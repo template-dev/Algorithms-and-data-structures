@@ -8,6 +8,8 @@ add_executable(
   ${PROJECT_NAME}
   SingleArray.hpp
   SingleArray.inl
+  VectorArray.hpp
+  VectorArray.inl
   main.cpp
 )
 
