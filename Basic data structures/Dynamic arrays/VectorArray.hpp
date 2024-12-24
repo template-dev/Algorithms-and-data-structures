@@ -21,6 +21,7 @@ namespace DataStructure {
     void insert(const T& value, int32_t index);
     T remove(size_t index);
     size_t size() const { return m_size; }
+    bool empty() const { return m_size == 0; }
 
     T& operator[](const int32_t index);
     const T& operator[](const int32_t index) const;

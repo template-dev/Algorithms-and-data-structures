@@ -34,14 +34,13 @@ namespace DataStructure {
 
   template<typename T>
   void VectorArray<T>::push_back(const T& value) {
-    if (!m_size) {
+    if (empty()) {
       m_data = std::make_unique<T[]>(m_coeff);
-      m_data[0] = value;
-      ++m_size;
+      m_data[m_size++] = value;
     } else {
       std::unique_ptr<T[]> tmp = std::make_unique<T[]>(m_size + m_coeff);
       for (int32_t i = 0; i < m_size; ++i)
-        tmp[i] = m_data[i];
+        tmp[i] = std::move(m_data[i]);
       tmp[m_size++] = value;
       m_data = std::move(tmp);
     }
@@ -53,9 +52,9 @@ namespace DataStructure {
       throw std::out_of_range("Index out of range");
     std::unique_ptr<T[]> tmp = std::make_unique<T[]>(m_size + m_coeff);
     for (size_t i = 0; i < m_size; ++i)
-      tmp[i] = m_data[i];
+      tmp[i] = std::move(m_data[i]);
     for (size_t i = m_size; i > index; --i)
-      tmp[i] = tmp[i - 1];
+      tmp[i] = std::move(tmp[i - 1]);
     tmp[index] = value;
     ++m_size;
     m_data = std::move(tmp);
@@ -65,13 +64,13 @@ namespace DataStructure {
   T VectorArray<T>::remove(size_t index) {
     if (index < 0 || index >= m_size)
       throw std::out_of_range("Index out of range");
-    T removeElement = m_data[index];
+    T removeElement = std::move(m_data[index]);
     for (size_t i = index; i < m_size - 1; ++i)
-      m_data[i] = m_data[i + 1];
+      m_data[i] = std::move(m_data[i + 1]);
     --m_size;
     std::unique_ptr<T[]> tmp = std::make_unique<T[]>(m_size);
     for (size_t i = 0; i < m_size; ++i)
-      tmp[i] = m_data[i];
+      tmp[i] = std::move(m_data[i]);
     m_data = std::move(tmp);
     return removeElement;
   }
