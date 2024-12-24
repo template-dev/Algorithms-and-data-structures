@@ -51,7 +51,7 @@ namespace DataStructure {
   void VectorArray<T>::insert(const T& value, int32_t index) {
     if (index < 0 || index > m_size)
       throw std::out_of_range("Index out of range");
-    std::unique_ptr<T[]> tmp = std::make_unique<T[]>(m_size + 1);
+    std::unique_ptr<T[]> tmp = std::make_unique<T[]>(m_size + m_coeff);
     for (size_t i = 0; i < m_size; ++i)
       tmp[i] = m_data[i];
     for (size_t i = m_size; i > index; --i)
