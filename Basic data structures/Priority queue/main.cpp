@@ -9,7 +9,9 @@ int main() {
     queue.enqueue(1, 75);
     queue.enqueue(3, 175);
     queue.enqueue(4, 172);
+    std::cout << queue << std::endl;
     queue.dequeue();
+    std::cout << queue << std::endl;
   }
   catch(const std::exception& ex) {
     std::cerr << ex.what() << std::endl;

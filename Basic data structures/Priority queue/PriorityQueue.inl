@@ -16,6 +16,25 @@ namespace DataStructure {
 
   template<typename T>
   T PriorityQueue<T>::dequeue() {
-    return T{};
+    for (short i = m_maxPriority; i >= 0; --i) {
+      if (!m_queue[i].empty()) {
+        T item = m_queue[i].front();
+        m_queue[i].pop_front();
+        return item;
+      }
+    }
+    throw std::runtime_error("Priority queue is empty");
+  }
+
+  template<typename T>
+  std::ostream& operator<<(std::ostream& os, const PriorityQueue<T>& pq) {
+    for (short i = pq.m_maxPriority; i >= 0; --i) {
+      os << "Priority " << i << ": ";
+      for (const auto& item : pq.m_queue[i]) {
+        os << item << " ";
+      }
+      os << std::endl;
+    }
+    return os;
   }
 }
