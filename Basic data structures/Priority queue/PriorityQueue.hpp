@@ -10,6 +10,11 @@ namespace DataStructure {
   public:
     PriorityQueue();
 
+    PriorityQueue(const PriorityQueue&) = delete;
+    PriorityQueue(PriorityQueue&&) = delete;
+    PriorityQueue& operator=(const PriorityQueue&) = delete;
+    PriorityQueue& operator=(PriorityQueue&&) = delete;
+
     void enqueue(short priority, T item);
     T dequeue();
 

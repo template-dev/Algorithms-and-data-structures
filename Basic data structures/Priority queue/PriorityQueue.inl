@@ -9,8 +9,9 @@ namespace DataStructure {
 
   template<typename T>
   void PriorityQueue<T>::enqueue(short priority, T item) {
-    if (priority <= 0 || priority > m_maxPriority)
+    if (priority < 0 || priority > m_maxPriority)
       throw std::invalid_argument("The maximum priority must be greater than 0 and less than 5");
+    m_queue[priority].emplace_back(item);
   }
 
   template<typename T>
