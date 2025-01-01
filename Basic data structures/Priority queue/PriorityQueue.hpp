@@ -18,6 +18,17 @@ namespace DataStructure {
     void enqueue(short priority, T item);
     T dequeue();
 
+    friend std::ostream& operator<<(std::ostream& os, const PriorityQueue& pq) {
+      for (short i = pq.m_maxPriority; i >= 0; --i) {
+        os << "Priority " << i << ": ";
+        for (const auto& item : pq.m_queue[i]) {
+          os << item << " ";
+        }
+        os << std::endl;
+      }
+      return os;
+    }
+
   private:
     std::vector<std::list<T>> m_queue;
     short m_maxPriority;

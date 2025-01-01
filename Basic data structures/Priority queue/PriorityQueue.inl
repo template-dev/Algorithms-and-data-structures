@@ -3,9 +3,9 @@
 namespace DataStructure {
   template<typename T>
   PriorityQueue<T>::PriorityQueue()
-    : m_queue{}
-    , m_maxPriority{5}
-  {}
+    : m_maxPriority{5} {
+    m_queue.resize(m_maxPriority + 1);
+  }
 
   template<typename T>
   void PriorityQueue<T>::enqueue(short priority, T item) {
@@ -24,17 +24,5 @@ namespace DataStructure {
       }
     }
     throw std::runtime_error("Priority queue is empty");
-  }
-
-  template<typename T>
-  std::ostream& operator<<(std::ostream& os, const PriorityQueue<T>& pq) {
-    for (short i = pq.m_maxPriority; i >= 0; --i) {
-      os << "Priority " << i << ": ";
-      for (const auto& item : pq.m_queue[i]) {
-        os << item << " ";
-      }
-      os << std::endl;
-    }
-    return os;
   }
 }
