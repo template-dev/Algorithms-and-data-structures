@@ -3,19 +3,17 @@
 namespace DataStructure {
   template<typename T>
   FactorArray<T>::FactorArray()
-    : m_size(0)
-    , m_capacity{0}
-    , m_data{nullptr}
+      : m_size(0)
+      , m_capacity{0}
+      , m_data{nullptr}
   {}
 
   template<typename T>
   FactorArray<T>::FactorArray(std::initializer_list<T> list)
-    : m_size{list.size()}
-    , m_capacity{m_size * 2}
-    , m_data{std::make_unique<T[]>(m_capacity)} {
-    size_t i = 0;
-    for (const auto& el : list)
-      m_data[i++] = el;
+      : m_size{list.size()}
+      , m_capacity{m_size * 2}
+      , m_data{std::make_unique<T[]>(m_capacity){}} {
+    std::copy(list.begin(), list.end(), m_data);
   }
 
   template<typename T>
