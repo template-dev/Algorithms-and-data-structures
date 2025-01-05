@@ -3,19 +3,17 @@
 namespace DataStructure {
   template<typename T>
   SingleArray<T>::SingleArray()
-    : m_size(0)
-    , m_coeff{1}
-    , m_data{nullptr}
+      : m_size(0)
+      , m_coeff{1}
+      , m_data{nullptr}
   {}
 
   template<typename T>
   SingleArray<T>::SingleArray(std::initializer_list<T> list)
-    : m_size{list.size()}
-    , m_coeff{1}
-    , m_data{std::make_unique<T[]>(m_size)} {
-    size_t i = 0;
-    for (const auto& el : list)
-      m_data[i++] = el;
+      : m_size{list.size()}
+      , m_coeff{1}
+      , m_data{std::make_unique<T[]>(m_size){}} {
+    std::copy(list.begin(), list.end(), m_data);
   }
 
   template<typename T>
