@@ -3,6 +3,7 @@
 
 #include <memory>
 #include <stdexcept>
+#include <algorithm>
 #include <initializer_list>
 
 namespace DataStructure {
