@@ -1,17 +1,8 @@
-cmake_minimum_required(VERSION 3.12 FATAL_ERROR)
+#include <iostream>
+#include "BitArithmetic.hpp"
 
-set(PROJECT_NAME "BitArithmetic")
+int main() {
+  std::cout << BitArithmetic::bit_count_first(0xF) << std::endl;
 
-project(${PROJECT_NAME})
-
-add_executable(
-  ${PROJECT_NAME}
-  main.cpp
-)
-
-set_target_properties(
-  ${PROJECT_NAME}
-  PROPERTIES
-  CXX_STANDARD 17
-  CXX_STANDARD_REQUIRED ON
-)
+  return EXIT_SUCCESS;
+}
