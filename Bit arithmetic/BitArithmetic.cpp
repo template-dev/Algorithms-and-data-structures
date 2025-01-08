@@ -11,4 +11,13 @@ namespace BitArithmetic {
     }
     return count;
   }
+
+  int32_t bit_count_second(int32_t num) {
+    int32_t count = 0;
+    while(num > 0) {
+      ++count;
+      num &= (num - 1);
+    }
+    return count;
+  }
 }
