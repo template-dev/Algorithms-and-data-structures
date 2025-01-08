@@ -32,4 +32,16 @@ namespace BitArithmetic {
       cache[i] = bit_count_first(i);
     return cache[num];
   }
+
+  int32_t bit_count_cache_v2(int32_t num) {
+    constexpr int32_t N = 16;
+
+    if (num < 0 || num > N)
+      return -1;
+
+    int32_t cache[N]{};
+    for (int32_t i = 0; i < N; ++i)
+      cache[i] = bit_count_first(i);
+    return cache[(num & 0xF0) >> 4] + cache[(num & 0x0F)];
+  }
 }
