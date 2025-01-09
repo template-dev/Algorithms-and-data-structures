@@ -69,7 +69,7 @@ namespace BitArithmetic {
           if ((m_bitboard & (static_cast<uint64_t>(1) << ((inner - 1) * 8 + j))) > 0) { /* set color */ }
           std::cout << " " << std::setw(2) << std::setfill(' ') << ((inner - 1) * 8 + j) << " ";
         }
-        std::cout << '\n';
+        std::cout << std::endl;
       }
     }
   }
