@@ -61,8 +61,8 @@ namespace BitArithmetic {
     m_bitboard = static_cast<uint64_t>(1) << point;
   }
 
-  void Bitboard::print(uint32_t row /* = 0 */) {
-    for (int i = row; i >= 0; --i) {
+  void Bitboard::print(uint64_t row /* = 0 */) {
+    for (int64_t i = static_cast<int64_t>(row); i >= 0; --i) {
       for (uint64_t inner = 8; inner > 0; --inner) {
         std::cout << inner << ": ";
         for (uint64_t j = 0; j < 8; ++j) {

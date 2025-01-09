@@ -20,7 +20,7 @@ namespace BitArithmetic {
       Bitboard(uint64_t mask);
       Bitboard(const std::string& str);
       virtual ~Bitboard() = default;
-      void print(uint32_t row = 0);
+      void print(uint64_t row = 0);
 
     protected:
       virtual void Steps() = 0;
