@@ -51,7 +51,8 @@ namespace BitArithmetic {
       : m_bitboard{mask}
   {}
 
-  Bitboard::Bitboard(const std::string& str) {
+  Bitboard::Bitboard(const std::string& str)
+      : m_bitboard{0} {
     if (str.size() < 1)
       return;
     std::string tmp = "";
