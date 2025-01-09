@@ -45,3 +45,18 @@ namespace BitArithmetic {
     return cache[(num & 0xF0) >> 4] + cache[(num & 0x0F)];
   }
 }
+
+namespace BitArithmetic {
+  Bitboard::Bitboard(uint64_t mask)
+      : m_bitboard{mask}
+  {}
+
+  Bitboard::Bitboard(const std::string& str) {
+    if (str.size() < 1)
+      return;
+    std::string tmp = "";
+    std::transform(str.begin(), str.end(), tmp.begin(), ::toupper);
+    uint64_t point = (tmp[0] - 'A') + (tmp[1] - '1') * 8;
+    m_bitboard = static_cast<uint64_t>(1) << point;
+  }
+}
