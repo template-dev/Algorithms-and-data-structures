@@ -1,8 +1,10 @@
 #ifndef CB20B50C_752C_4E24_8D5E_6CA8068EC132
 #define CB20B50C_752C_4E24_8D5E_6CA8068EC132
 
-#include <cstdint>
+#include <iostream>
 #include <algorithm>
+#include <iomanip>
+#include <cstdint>
 #include <string>
 
 namespace BitArithmetic {
@@ -17,6 +19,7 @@ namespace BitArithmetic {
     public:
       Bitboard(uint64_t mask);
       Bitboard(const std::string& str);
+      void print(int32_t row = 0);
       virtual void Steps() = 0;
 
     private:
