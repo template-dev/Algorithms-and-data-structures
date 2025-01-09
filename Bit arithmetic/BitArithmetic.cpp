@@ -55,21 +55,49 @@ namespace BitArithmetic {
       : m_bitboard{0} {
     if (str.size() < 1)
       return;
-    std::string tmp = "";
-    std::transform(str.begin(), str.end(), tmp.begin(), ::toupper);
+    std::string tmp = str;
+    std::transform(tmp.begin(), tmp.end(), tmp.begin(), ::toupper);
     uint64_t point = (tmp[0] - 'A') + (tmp[1] - '1') * 8;
     m_bitboard = static_cast<uint64_t>(1) << point;
   }
 
-  void Bitboard::print(int32_t row /* = 0 */) {
-    for (size_t i = row; i < 0; --i) {
-      for (uint64_t i = 8; i > 0; --i) {
-        std::cout << i << ": ";
+  void Bitboard::print(uint32_t row /* = 0 */) {
+    for (int i = row; i >= 0; --i) {
+      for (uint64_t inner = 8; inner > 0; --inner) {
+        std::cout << inner << ": ";
         for (uint64_t j = 0; j < 8; ++j) {
-          if ((m_bitboard & (static_cast<uint64_t>(1) << ((i - 1) * 8 + j))) > 0) { /* set colors */ }
-          std::cout << " "  << std::setw(2) << std::setfill(' ')  << ((i - 1) * 8 + j) << " ";
+          if ((m_bitboard & (static_cast<uint64_t>(1) << ((inner - 1) * 8 + j))) > 0) { /* set color */ }
+          std::cout << " " << std::setw(2) << std::setfill(' ') << ((inner - 1) * 8 + j) << " ";
         }
+        std::cout << '\n';
       }
     }
+  }
+
+  void Bitboard::setBitboard(uint64_t newBitboard) {
+    if (newBitboard != m_bitboard)
+      m_bitboard = newBitboard;
+  }
+}
+
+namespace BitArithmetic {
+  King::King(uint64_t mask)
+      : Bitboard{mask}
+  {}
+
+  King::King(const std::string& str)
+      : Bitboard{str}
+  {}
+
+  void King::Steps() {
+    uint64_t mask = (getBitboard() & 0x7F7F7F7F7F7F7F7F) << 1;
+    mask |= (getBitboard() & 0xFEFEFEFEFEFEFEFE) >> 1;
+    mask |= (getBitboard() << 8);
+    mask |= (getBitboard() >> 8);
+    mask |= (getBitboard() & 0xFEFEFEFEFEFEFEFE) >> 9;
+    mask |= (getBitboard() & 0xFEFEFEFEFEFEFEFE) << 7;
+    mask |= (getBitboard() & 0x7F7F7F7F7F7F7F7F) << 9;
+    mask |= (getBitboard() & 0x7F7F7F7F7F7F7F7F) >> 7;
+    setBitboard(mask);
   }
 }
