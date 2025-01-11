@@ -1,12 +1,13 @@
 cmake_minimum_required(VERSION 3.12 FATAL_ERROR)
 
-set(PROJECT_NAME "SelectionSort")
+set(PROJECT_NAME "BubbleSort")
 
 project(${PROJECT_NAME})
 
 add_executable(
   ${PROJECT_NAME}
-  selectionSort.h
+  Bubble.hpp
+  Bubble.cpp
   main.cpp
 )
 
